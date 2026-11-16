@@ -10,12 +10,31 @@ router.post("/create", authProtect, async (req, res, next) => {
     const { title, author, description, categoryId, priceRequest } = req.body;
     const { sub, isAdmin } = req.user;
 
+    const parsedCategoryId =
+      categoryId === undefined || categoryId === null || categoryId === ""
+        ? null
+        : Number(categoryId);
+
+    if (
+      parsedCategoryId !== null &&
+      (!Number.isSafeInteger(parsedCategoryId) || parsedCategoryId <= 0)
+    ) {
+      return res.status(400).json({ message: "Invalid categoryId" });
+    }
+
+    if (
+      parsedCategoryId !== null &&
+      !(await prisma.category.findUnique({ where: { id: parsedCategoryId } }))
+    ) {
+      return res.status(400).json({ message: "Category not found" });
+    }
+
     const newBook = await prisma.book.create({
       data: {
         title,
         author,
         description,
-        categoryId: Number(categoryId),
+        categoryId: parsedCategoryId,
         userId: Number(sub),
         priceRequest: Number(priceRequest),
       },
