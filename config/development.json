@@ -1,0 +1,7 @@
+{
+    "Appname": "BookStore",
+    "serverUrl": "http://localhost:9000",
+    "PORT": 9000,
+    "appSecret": "hyhuhybsudkhdf==()",
+    "frontendUrl": "http://localhost:5173/"
+}

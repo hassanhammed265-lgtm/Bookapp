@@ -1,0 +1,5 @@
+{
+    "Appname": "BookStore App - production",
+    "serverUrl": "http://localhost:9000",
+    "PORT": 9000
+}
