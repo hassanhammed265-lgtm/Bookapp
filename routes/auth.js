@@ -86,19 +86,19 @@ router.post("/login", async (req, res, next) => {
     }
 
     if (typeof user.password !== "string" || user.password.length === 0) {
-      return res.status(400).json({ message: "Invalid password" });
+      return res.status(400).json({ message: "Invalid credentials" });
     }
 
     const verifyPassword = await argon.verify(user.password, password);
 
     if (!verifyPassword) {
-      return res.status(400).json({ message: "Invalid password" });
+      return res.status(400).json({ message: "Invalid credentials" });
     }
-    try {
-      await sendWelBackEmail(user.email);
-    } catch (error) {
-      console.error("Failed to send welcome back email");
-    }
+    // try {
+    //   await sendWelBackEmail(user.email);
+    // } catch (error) {
+    //   console.error("Failed to send welcome back email");
+    // }
     const payload = {
       sub: user.id,
       email: user.email,
