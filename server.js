@@ -5,7 +5,7 @@ const cors = require("cors");
 const port = config.get("PORT") || 9000;
 const frontendUrl = config.get("frontendUrl");
 const path = require("path");
-app.use(cors(frontendUrl));
+// app.use(cors(frontendUrl));
 
 
 console.log(config.get("Appname"));
